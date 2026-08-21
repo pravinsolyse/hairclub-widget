@@ -1,6 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 import Replicate from 'replicate';
 
 dotenv.config();
@@ -61,6 +68,16 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
+
+// Serve the static files from the React app's dist folder
+app.use(express.static(path.join(__dirname, '../app/dist')));
+
+// Any request that doesn't match an API route should serve the React App
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../app/dist/index.html'));
+});
+
 app.listen(port, () => {
   console.log(`HairClub Backend listening on port ${port}`);
 });
+
