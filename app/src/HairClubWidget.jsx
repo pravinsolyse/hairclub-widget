@@ -551,16 +551,16 @@ export default function HairClubWidget() {
       </div>
       {Dots()}
       <div style={{ flex: 1, padding: "8px 24px 24px", display: "flex", flexDirection: "column" }}>
-        <h2 style={{ fontFamily: '"Area Normal", sans-serif', fontSize: 28, fontWeight: 700, color: "#1A1A1A", margin: "0 0 8px", textAlign: "center", letterSpacing: "-0.5px" }}>
+        <h2 style={{ fontFamily: '"Area Normal", sans-serif', fontSize: 28, fontWeight: 700, color: "#1A1A1A", margin: "0 0 8px", textAlign: "center", letterSpacing: "-0.5px", flexShrink: 0 }}>
           Your New Look
         </h2>
-        <p style={{ fontSize: 14, color: "#6B7280", textAlign: "center", margin: "0 0 24px" }}>
+        <p style={{ fontSize: 14, color: "#6B7280", textAlign: "center", margin: "0 0 24px", flexShrink: 0 }}>
           Drag the slider to compare before & after
         </p>
 
         {/* Before/After Slider */}
         <div ref={sliderRef} style={{
-          position: "relative", width: "100%", height: 320, borderRadius: 12,
+          position: "relative", width: "100%", flex: 1, minHeight: 0, borderRadius: 12,
           overflow: "hidden", cursor: "ew-resize", touchAction: "none", marginBottom: 20,
           background: COLORS.gray100,
         }}
@@ -569,15 +569,10 @@ export default function HairClubWidget() {
         >
           {/* Labels */}
           <div style={{
-            position: "absolute", top: 16, left: 16, zIndex: 3,
+            position: "absolute", top: 16, left: 16, zIndex: 1,
             fontSize: 11, fontWeight: 700, color: COLORS.white, letterSpacing: 1,
             textShadow: "0 1px 4px rgba(0,0,0,0.6)",
           }}>BEFORE</div>
-          <div style={{
-            position: "absolute", top: 16, left: 16, zIndex: 3,
-            fontSize: 11, fontWeight: 700, color: COLORS.white, letterSpacing: 1,
-            textShadow: "0 1px 4px rgba(0,0,0,0.6)",
-          }}>AFTER</div>
 
           {/* Before image (full) */}
           {photoUrl && <img src={photoUrl} alt="before" style={{
@@ -588,10 +583,10 @@ export default function HairClubWidget() {
           {/* After image (clipped) */}
           <div style={{
             position: "absolute", top: 0, right: 0, width: `${100 - sliderPos}%`, height: "100%",
-            overflow: "hidden",
+            overflow: "hidden", zIndex: 2,
           }}>
             <div style={{
-              position: "absolute", top: 16, left: 16, zIndex: 3,
+              position: "absolute", top: 16, right: 16, zIndex: 3,
               fontSize: 11, fontWeight: 700, color: COLORS.white, letterSpacing: 1,
               textShadow: "0 1px 4px rgba(0,0,0,0.6)",
             }}>AFTER</div>
